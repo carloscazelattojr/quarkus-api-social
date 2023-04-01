@@ -40,7 +40,7 @@ public class FollowerController {
 
         User user = userRepository.findById(userId);
         if (user == null) {
-            return Response.status(400).build();
+            return Response.status(404).build();
         }
 
         User follower = userRepository.findById(requestDTO.getFollowerId());
@@ -60,7 +60,7 @@ public class FollowerController {
     public Response listFollowers(@PathParam("userId") Long userId) {
         User user = userRepository.findById(userId);
         if (user == null) {
-            return Response.status(400).build();
+            return Response.status(404).build();
         }
         List<Follower> list = followerRepository.findByUser(userId);
         FollowersPerUserResponse response = new FollowersPerUserResponse();
@@ -75,7 +75,7 @@ public class FollowerController {
     public Response unfollowUser(@PathParam("userId") Long userId, @QueryParam("followerId") Long followerId){
         User user = userRepository.findById(userId);
         if (user == null) {
-            return Response.status(400).build();
+            return Response.status(404).build();
         }
 
         followerRepository.deleteByFollowerAndUser(followerId, userId);

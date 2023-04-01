@@ -40,7 +40,7 @@ public class PostController {
     public Response savePost(@PathParam("userId") Long userId, CreatePostDTO postDTO) {
         User user = userRepository.findById(userId);
         if (user == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
         Post post = new Post();
         post.setPostText(postDTO.getText());
@@ -55,7 +55,7 @@ public class PostController {
 
         User user = userRepository.findById(userId);
         if (user == null) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         if (followerId == null) {
